@@ -10,3 +10,6 @@
  7 - cardlist.tsx component config
  8 - index.tsx formattedData
  9 - index.tsx load more
+ 10 - viewImage.tsx
+ 11 - FormAddImage.tsx
+ 12 - tests
