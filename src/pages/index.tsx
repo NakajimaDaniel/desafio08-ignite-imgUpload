@@ -19,7 +19,8 @@ export default function Home(): JSX.Element {
   } = useInfiniteQuery(
     'images',
     // TODO AXIOS REQUEST WITH PARAM
-    ({ pageParam = 0 }) => fetch('/api/images?after=' + pageParam)
+    // ({ pageParam = 0 }) => fetch('/api/images?after=' + pageParam)
+    ({ pageParam = 0 }) => api.get('/api/images?after=' + pageParam).then(response=>response.data)
     ,
     // TODO GET AND RETURN NEXT PAGE PARAM
     {getNextPageParam: (lastPage, pages) => lastPage}
@@ -27,18 +28,21 @@ export default function Home(): JSX.Element {
 
   const formattedData = useMemo(() => {
     // TODO FORMAT AND FLAT DATA ARRAY
+    return (data.pages)
   }, [data]);
 
   // TODO RENDER LOADING SCREEN
 
   // TODO RENDER ERROR SCREEN
+ 
+  console.log(formattedData)
 
   return (
     <>
       <Header />
 
       <Box maxW={1120} px={20} mx="auto" my={20}>
-        <CardList cards={formattedData} />
+        {/* <CardList cards={formattedData} /> */}
         {/* TODO RENDER LOAD MORE BUTTON IF DATA HAS NEXT PAGE */}
       </Box>
     </>
