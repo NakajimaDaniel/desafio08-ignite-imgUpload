@@ -28,7 +28,10 @@ export default function Home(): JSX.Element {
 
   const formattedData = useMemo(() => {
     // TODO FORMAT AND FLAT DATA ARRAY
-    return (data.pages)
+    return data?.pages.flatMap((val)=>{return val.data})
+    
+ 
+
   }, [data]);
 
   // TODO RENDER LOADING SCREEN
@@ -42,7 +45,7 @@ export default function Home(): JSX.Element {
       <Header />
 
       <Box maxW={1120} px={20} mx="auto" my={20}>
-        {/* <CardList cards={formattedData} /> */}
+        <CardList cards={formattedData} />
         {/* TODO RENDER LOAD MORE BUTTON IF DATA HAS NEXT PAGE */}
       </Box>
     </>
