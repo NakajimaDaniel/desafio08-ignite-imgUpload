@@ -23,17 +23,16 @@ export function ModalViewImage({
   
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} >
         <ModalOverlay />
-        <ModalContent>
-          dasdasdasdas
-          <ModalBody>
-            <Image src={imgUrl} />
-
-          </ModalBody>
+        <ModalContent alignItems="center" w="0">
+          
+          
+            <Image src={imgUrl} maxW="900px" maxH="600px"/>
+          
 
           <ModalFooter>
-            <Link>Teedessss</Link>
+            <Link>Abrir Original</Link>
           </ModalFooter>
         </ModalContent>
       </Modal>
