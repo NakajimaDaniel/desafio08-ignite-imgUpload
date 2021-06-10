@@ -19,12 +19,25 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
   const formValidations = {
     image: {
       // TODO REQUIRED, LESS THAN 10 MB AND ACCEPTED FORMATS VALIDATIONS
+      required: "Arquivo obrigatório",
+      validate: {
+        lessThan10MB: size => size < 10,
+        acceptedFormats: type => type === "image/jpeg" || " image/png" || "image/gif",
+      }
+
+
     },
     title: {
       // TODO REQUIRED, MIN AND MAX LENGTH VALIDATIONS
+      required: true,
+      minLength: 2,
+      maxLength: 20,
+
     },
     description: {
       // TODO REQUIRED, MAX LENGTH VALIDATIONS
+      required: true,
+      maxLength: 65,
     },
   };
 
@@ -69,18 +82,35 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
           trigger={trigger}
           // TODO SEND IMAGE ERRORS
           // TODO REGISTER IMAGE INPUT WITH VALIDATIONS
+          {...register("FileInput", formValidations.image)}
         />
+        {errors.FileInput && <span role="alert">{errors.FileInput.message}</span>}
+        
 
         <TextInput
           placeholder="Título da imagem..."
           // TODO SEND TITLE ERRORS
+          
+          error = {
+            errors.TextInput?.type === 'required' && {type: "required", message: "Título obrigatório"} ||
+            errors.TextInput?.type === "minLength" && {type: "minLength", message: "Mínimo de 2 caracteres"} ||
+            errors.TextInput?.type === "maxLength" && {type: "maxLength", message: "Máximo de 20 caracteres"}
+          }
           // TODO REGISTER TITLE INPUT WITH VALIDATIONS
+          {...register("TextInput", formValidations.title)}
+         
         />
+        
 
         <TextInput
           placeholder="Descrição da imagem..."
           // TODO SEND DESCRIPTION ERRORS
+          error = {
+            errors.TextInput?.type === 'required' && {type: "required", message: "Descrição obrigatória"} ||
+            errors.TextInput?.type === 'maxLength' && {type: "maxLength", message: "Máximo de 65 caracteres"}
+          }
           // TODO REGISTER DESCRIPTION INPUT WITH VALIDATIONS
+          {...register("TextInput", formValidations.description)}
         />
       </Stack>
 
