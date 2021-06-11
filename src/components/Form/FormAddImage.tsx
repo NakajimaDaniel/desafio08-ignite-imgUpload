@@ -19,10 +19,10 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
   const formValidations = {
     image: {
       // TODO REQUIRED, LESS THAN 10 MB AND ACCEPTED FORMATS VALIDATIONS
-      required: "Arquivo obrigatório",
+      required: true,
       validate: {
-        lessThan10MB: size => size < 10,
-        acceptedFormats: type => type === "image/jpeg" || " image/png" || "image/gif",
+        lessThan10MB: (file) => file[0].size > 10485760,
+        acceptedFormats: type => type === false,
       }
 
 
@@ -80,17 +80,23 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
           setLocalImageUrl={setLocalImageUrl}
           setError={setError}
           trigger={trigger}
+          // name="file"
           // TODO SEND IMAGE ERRORS
+          // error = {
+          //   errors.FileInput?.type === 'required' && {type: 'required', message: "Arquivo obrigatório"} ||
+          //   errors.FileInput?.type === "lessThan10MB" && {type: "lessThan10MB", message: "O arquivo deve ser menor que 10MB"} ||
+          //   errors.FileInput?.type === "acceptedFormats" && {type: "acceptedFormats", message: "Somente são aceitos arquivos PNG, JPEG e GIF"}
+          // }
           // TODO REGISTER IMAGE INPUT WITH VALIDATIONS
           {...register("FileInput", formValidations.image)}
         />
-        {errors.FileInput && <span role="alert">{errors.FileInput.message}</span>}
+        
         
 
         <TextInput
           placeholder="Título da imagem..."
           // TODO SEND TITLE ERRORS
-          
+
           error = {
             errors.TextInput?.type === 'required' && {type: "required", message: "Título obrigatório"} ||
             errors.TextInput?.type === "minLength" && {type: "minLength", message: "Mínimo de 2 caracteres"} ||
@@ -105,10 +111,11 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
         <TextInput
           placeholder="Descrição da imagem..."
           // TODO SEND DESCRIPTION ERRORS
-          error = {
-            errors.TextInput?.type === 'required' && {type: "required", message: "Descrição obrigatória"} ||
-            errors.TextInput?.type === 'maxLength' && {type: "maxLength", message: "Máximo de 65 caracteres"}
-          }
+
+          // error = {
+          //   errors.TextInput?.type === 'required' && {type: "required", message: "Descrição obrigatória"} ||
+          //   errors.TextInput?.type === 'maxLength' && {type: "maxLength", message: "Máximo de 65 caracteres"}
+          // }
           // TODO REGISTER DESCRIPTION INPUT WITH VALIDATIONS
           {...register("TextInput", formValidations.description)}
         />
