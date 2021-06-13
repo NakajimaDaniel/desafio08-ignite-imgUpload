@@ -96,28 +96,28 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
         <TextInput
           placeholder="Título da imagem..."
           // TODO SEND TITLE ERRORS
-
+          name = "titleInput"
           error = {
-            errors.TextInput?.type === 'required' && {type: "required", message: "Título obrigatório"} ||
-            errors.TextInput?.type === "minLength" && {type: "minLength", message: "Mínimo de 2 caracteres"} ||
-            errors.TextInput?.type === "maxLength" && {type: "maxLength", message: "Máximo de 20 caracteres"}
+            errors.titleInput?.type === "required" && {type: "required", message: "Título obrigatório"} ||
+            errors.titleInput?.type === "minLength" && {type: "minLength", message: "Mínimo de 2 caracteres"} ||
+            errors.titleInput?.type === "maxLength" && {type: "maxLength", message: "Máximo de 20 caracteres"}
           }
           // TODO REGISTER TITLE INPUT WITH VALIDATIONS
-          {...register("TextInput", formValidations.title)}
-         
+          {...register("titleInput", formValidations.title)}
+
         />
-        
+
 
         <TextInput
           placeholder="Descrição da imagem..."
           // TODO SEND DESCRIPTION ERRORS
-
-          // error = {
-          //   errors.TextInput?.type === 'required' && {type: "required", message: "Descrição obrigatória"} ||
-          //   errors.TextInput?.type === 'maxLength' && {type: "maxLength", message: "Máximo de 65 caracteres"}
-          // }
+          name="descriptionInput"
+          error = {
+            errors.descriptionInput?.type === 'required' && {type: "required", message: "Descrição obrigatória"} ||
+            errors.descriptionInput?.type === 'maxLength' && {type: "maxLength", message: "Máximo de 65 caracteres"}
+          }
           // TODO REGISTER DESCRIPTION INPUT WITH VALIDATIONS
-          {...register("TextInput", formValidations.description)}
+          {...register("descriptionInput", formValidations.description)}
         />
       </Stack>
 
