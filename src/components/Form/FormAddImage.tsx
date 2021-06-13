@@ -21,7 +21,8 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
       // TODO REQUIRED, LESS THAN 10 MB AND ACCEPTED FORMATS VALIDATIONS
       required: true,
       validate: {
-        lessThan10MB: (file) => file[0].size > 10485760,
+        //10485760  actual 101757
+        lessThan10MB: (file) => parseInt(file[0].size) < 10485760, //<10 false = error   >10 true
         acceptedFormats: type => type === false,
       }
 
@@ -80,15 +81,15 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
           setLocalImageUrl={setLocalImageUrl}
           setError={setError}
           trigger={trigger}
-          // name="file"
+          name="file"
           // TODO SEND IMAGE ERRORS
-          // error = {
-          //   errors.FileInput?.type === 'required' && {type: 'required', message: "Arquivo obrigatório"} ||
-          //   errors.FileInput?.type === "lessThan10MB" && {type: "lessThan10MB", message: "O arquivo deve ser menor que 10MB"} ||
+          error = {
+            errors.file?.type === 'required' && {type: 'required', message: "Arquivo obrigatório"} ||
+            errors.file?.type === "lessThan10MB" && {type: "lessThan10MB", message: "O arquivo deve ser menor que 10MB"}
           //   errors.FileInput?.type === "acceptedFormats" && {type: "acceptedFormats", message: "Somente são aceitos arquivos PNG, JPEG e GIF"}
-          // }
+          }
           // TODO REGISTER IMAGE INPUT WITH VALIDATIONS
-          {...register("FileInput", formValidations.image)}
+          {...register("file", formValidations.image)}
         />
         
         
