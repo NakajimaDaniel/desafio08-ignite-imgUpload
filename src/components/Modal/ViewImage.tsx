@@ -33,7 +33,7 @@ export function ModalViewImage({
             
 
           <ModalFooter justifyContent="left" >
-            <Link to="route" target="_blank" rel="noopener noreferrer" href={imgUrl} >Abrir Original</Link>
+            <Link to="route" target="_blank" rel="noopener noreferrer" href={imgUrl} >Abrir original</Link>
           </ModalFooter>
         </ModalContent>
       </Modal>
