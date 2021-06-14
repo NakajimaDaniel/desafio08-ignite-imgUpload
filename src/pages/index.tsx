@@ -20,7 +20,12 @@ export default function Home(): JSX.Element {
     'images',
     // TODO AXIOS REQUEST WITH PARAM
     // ({ pageParam = 0 }) => fetch('/api/images?after=' + pageParam)
-    ({ pageParam = 0 }) => api.get('/api/images?after=' + pageParam).then(response=>response.data)
+    
+    ({ pageParam = 0 }) => api.get(`/api/images`, {
+      params: {
+        after: pageParam,
+      },
+    }).then(response=>response.data)
     ,
     // TODO GET AND RETURN NEXT PAGE PARAM
     {getNextPageParam: (lastPage, pages) => lastPage}
@@ -35,14 +40,17 @@ export default function Home(): JSX.Element {
   }, [data]);
 
   // TODO RENDER LOADING SCREEN
-
+  if(isLoading) {
+    return (<Loading />)
+  }
   // TODO RENDER ERROR SCREEN
- 
+  if(isError) {
+    return (<Error />)
+  }
 
   return (
     <>
-    {isLoading? (<Loading />):(
-      isError? (<Error />):(
+
         <>
           <Header />
           <Box maxW={1120} px={20} mx="auto" my={20}>
@@ -50,8 +58,6 @@ export default function Home(): JSX.Element {
             {/* TODO RENDER LOAD MORE BUTTON IF DATA HAS NEXT PAGE */}
           </Box>
         </>
-      )
-    )}
 
     </>
   );
