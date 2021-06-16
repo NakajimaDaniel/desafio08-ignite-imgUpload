@@ -74,9 +74,11 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
         })
       }
       // TODO EXECUTE ASYNC MUTATION
+      const todo = await mutation.mutateAsync()
       // TODO SHOW SUCCESS TOAST
     } catch {
       // TODO SHOW ERROR TOAST IF SUBMIT FAILED
+      
     } finally {
       // TODO CLEAN FORM, STATES AND CLOSE MODAL
     }
