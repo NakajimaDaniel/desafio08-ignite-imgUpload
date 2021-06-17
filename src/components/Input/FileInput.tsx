@@ -84,8 +84,9 @@ const FileInputBase: ForwardRefRenderFunction<
 
       const formData = new FormData();
 
-      formData.append(event.target.name, event.target.files[0]);
-      formData.append('key', process.env.NEXT_PUBLIC_IMGBB_API_KEY);
+
+      formData.append('image', event.target.files[0]);
+      formData.set('key', process.env.NEXT_PUBLIC_IMGBB_API_KEY);      
 
       const { CancelToken } = axios;
       const source = CancelToken.source();
@@ -98,6 +99,22 @@ const FileInputBase: ForwardRefRenderFunction<
         },
         cancelToken: source.token,
       } as AxiosRequestConfig;
+
+
+      // function uploadImage(img) {
+      //   let body = new FormData()
+      //   body.set('key', process.env.NEXT_PUBLIC_IMGBB_API_KEY)
+      //   body.append('image', img)
+    
+      //   return axios({
+      //     method: 'post',
+      //     url: 'https://api.imgbb.com/1/upload',
+      //     data: body
+      //   })
+      // }
+
+      // uploadImage(event.target.files[0]);
+
 
       try {
         const response = await api.post(
