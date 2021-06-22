@@ -85,8 +85,9 @@ const FileInputBase: ForwardRefRenderFunction<
       const formData = new FormData();
 
 
-      formData.append('image', event.target.files[0]);
-      formData.set('key', process.env.NEXT_PUBLIC_IMGBB_API_KEY);      
+
+      formData.set(event.target.name, event.target.files[0]);
+      formData.set('key', process.env.NEXT_PUBLIC_IMGBB_API_KEY);    
 
       const { CancelToken } = axios;
       const source = CancelToken.source();
@@ -122,7 +123,6 @@ const FileInputBase: ForwardRefRenderFunction<
           formData,
           config
         );
-
         setImageUrl(response.data.data.url);
         setLocalImageUrl(URL.createObjectURL(event.target.files[0]));
       } catch (err) {
