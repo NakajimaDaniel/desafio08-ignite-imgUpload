@@ -19,7 +19,7 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
   const formValidations = {
     image: {
       // TODO REQUIRED, LESS THAN 10 MB AND ACCEPTED FORMATS VALIDATIONS
-      required: true,
+      required: "Arquivo Obrigatorio",
       validate: {
         //10485760  actual 101757
         lessThan10MB: (file) => parseInt(file[0].size) < 10485760, //<10 false = error   >10 true
@@ -30,15 +30,24 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
     },
     title: {
       // TODO REQUIRED, MIN AND MAX LENGTH VALIDATIONS
-      required: true,
-      minLength: 2,
-      maxLength: 20,
+      required: "titulo obrigatorio",
+      minLength: {
+        value:2,
+        message: "Mínimo de 2 caracteres" 
+      },
+      maxLength: {
+        value: 20,
+        message: "Máximo de 20 caracteres"
+      },
 
     },
     description: {
       // TODO REQUIRED, MAX LENGTH VALIDATIONS
-      required: true,
-      maxLength: 65,
+      required: 'descrição obrigatorio',
+      maxLength: {
+        value: 65,
+        message: "Máximo de 65 caracteres"
+      },
     },
   };
 
@@ -125,35 +134,28 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
           // }
           // TODO REGISTER IMAGE INPUT WITH VALIDATIONS
 
-          {...register("image")}
+          {...register("image", formValidations.image)}
         />
   
         <TextInput
           placeholder="Título da imagem..."
           // TODO SEND TITLE ERRORS
-          name = "title"
-          // error = {
-          //   errors.titleInput?.type === "required" && {type: "required", message: "Título obrigatório"} ||
-          //   errors.titleInput?.type === "minLength" && {type: "minLength", message: "Mínimo de 2 caracteres"} ||
-          //   errors.titleInput?.type === "maxLength" && {type: "maxLength", message: "Máximo de 20 caracteres"}
-          // }
+          // name = "title"
+          error = {errors.title}
           // TODO REGISTER TITLE INPUT WITH VALIDATIONS
 
-          {...register("title")}
+          {...register("title", formValidations.title)}
         />
 
 
         <TextInput
           placeholder="Descrição da imagem..."
           // TODO SEND DESCRIPTION ERRORS
-          name="description"
-          // error = {
-          //   errors.descriptionInput?.type === 'required' && {type: "required", message: "Descrição obrigatória"} ||
-          //   errors.descriptionInput?.type === 'maxLength' && {type: "maxLength", message: "Máximo de 65 caracteres"}
-          // }
+          // name="description"
+          error = {errors.description}
           // TODO REGISTER DESCRIPTION INPUT WITH VALIDATIONS
 
-          {...register("description")}
+          {...register("description", formValidations.description)}
         />
       </Stack>
 
