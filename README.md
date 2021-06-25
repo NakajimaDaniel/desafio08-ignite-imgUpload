@@ -14,6 +14,8 @@ Implementar funções a uma aplicação de upload de imagens
  - React Query
 
 
+# How to run
+
 ```bash
 $ git clone
 $ yarn
