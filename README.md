@@ -1,4 +1,4 @@
-# desafio08-ignite-imgUpload
+# UpFi
 Desafio do Capítulo IV Rocketseat - Ignite
 
 # About 
