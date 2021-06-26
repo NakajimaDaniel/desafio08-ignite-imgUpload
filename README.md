@@ -12,6 +12,7 @@ Implementar funções a uma aplicação de upload de imagens
  - ChakraUI
  - React Hook Form
  - React Query
+ - NextJs
 
 
 # How to run
